@@ -19,3 +19,14 @@ after_success:
   - docker push naikvarun/multi-server
   - docker push naikvarun/multi-worker
   - docker push naikvarun/multi-nginx
+
+deploy:
+  deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  app: "fibo-docker"
+  env: "FiboDocker-env"
+  bucket: "elasticbeanstalk-us-east-2-803550409432"
+  bucket_path: "fibo-docker"

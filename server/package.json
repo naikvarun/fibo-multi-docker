@@ -8,7 +8,10 @@
     "dev": "nodemon"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Varun Naik",
+    "email": "nkvrn85@gmail.com"
+  },
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",

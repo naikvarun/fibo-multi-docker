@@ -1,0 +1,22 @@
+{
+  "name": "worker",
+  "version": "0.0.1",
+  "description": "Worker process to calculate Fibonacci Sequence",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Varun Naik",
+    "email": "nkvrn85@gmail.com"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "redis": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}

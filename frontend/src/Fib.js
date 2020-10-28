@@ -1,60 +1,93 @@
 import React, {useEffect, useState} from "react";
-import {fetchIndices, fetchValues, postIndex} from "./services/fib-service";
+import axios from "axios";
 
-const Fib = () => {
-
-  const [indices, setIndices] = useState([]);
-  const [values, setValues] = useState({});
+const Fibo = () => {
   const [index, setIndex] = useState('');
+  const [indices, setIndices] = useState([])
+  const [values, setValues] = useState({})
 
-  /*useEffect(() => {
-    const init = async () => {
-        const seenIndices = await fetchIndices();
-        setIndices(seenIndices);
-        const seenValues = await fetchValues();
-        setValues(seenValues);
-    }
-    init();
-  }, []);*/
+  useEffect(() => {
+    axios.get('/api/fibo/indices')
+      .then(result => setIndices(result.data))
+      .catch(error => {
+        setIndices([{"fibo_index": 1}, {"fibo_index": 2}, {"fibo_index": 3}, {"fibo_index": 4}, {"fibo_index": 5}])
+        console.error(error)
+      });
+    axios.get('/api/fibo/values')
+      .then(result => setValues(result.data))
+      .catch(error => {
+        setValues({"1": 1, "2": 1, "3": 2, "4": 3, "5":5});
+        console.error(error)
+      });
+  }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    postIndex(index);
+  const handleSubmit = (event) => {
+
+    event.preventDefault();
+    fetch(`/api/fibo/${index}`, {method: 'POST'})
+      .then(() => {
+      });
   }
-
   return (
-    <div className="container-fluid">
-      <div className="text-center">
-        <h1>Fibonacci Sequence</h1>
-        <div className="row">
-          <div className="col-md-4 offset-md-4">
+    <>
+      <section className="section pb-0">
+        <div className="has-text-centered">
+          <span className="title is-1">Fibonacci Sequence</span>
+        </div>
+      </section>
+      <section className="section pb-0">
+        <div className="columns">
+          <div className="column is-half is-offset-one-quarter">
+
             <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="indexInput">Index</label>
-                <input type="number" className="form-control" id="indexInput" aria-describedby="indexHelp"
-                       placeholder="4" value={index} onChange={(e) => setIndex(e.target.value)}/>
-                <small id="indexHelp" className="form-text text-muted">Fibonacci index to be calculated.</small>
+              <div className="field">
+                <label htmlFor="indexInput" className="label has-text-centered">Index of Fibonacci sequence to be
+                  calculated</label>
+                <input type="number" className="input" id="indexInput" placeholder="4" value={index}
+                       onChange={(e) => setIndex(e.target.value)}/>
               </div>
-              <button disabled={!index} type="submit" className="btn btn-primary">Submit</button>
+              <div className="has-text-centered">
+                <button disabled={!index} type="submit" className="button is-primary">Submit</button>
+              </div>
+
             </form>
           </div>
         </div>
-        <div className="row mt-5">
-          <div className="col-md-4 offset-md-4">
-            <h3>Indices Seen</h3>
-            {indices.join(', ')}
+      </section>
+      <section className="section">
+        <div className="columns">
+          <div className="column">
+            <div className="box has-text-centered">
+              <span className="subtitle is-2">Indices seen</span>
+              <p className="is-1">
+              {indices.map(i => {
+                return i.fibo_index
+              }).join(', ')}
+              </p>
+            </div>
+          </div>
+          <div className="column">
+            <div className="box has-text-centered">
+              <span className="subtitle is-2 ">Calculated Values</span>
+              <div>
+                {
+                  Object.keys(values).map(key => {
+                    return (
+                      <div key={key}>
+                        <span>Calculated {values[key]} for index {key}</span>
+                      </div>
+                    )
+                  })
+                }
+              </div>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div className="row mt-5">
-          <div className="col-md-4 offset-md-4">
-            <h3>Calculated Values</h3>
-          </div>
-        </div>
-      </div>
+    </>
 
-    </div>
-  )
+  );
 }
 
-export default Fib;
+export default Fibo;

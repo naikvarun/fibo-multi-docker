@@ -3,16 +3,20 @@ import {NavLink} from "react-router-dom";
 
 const Header = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <NavLink activeClassName="active" className="navbar-brand" to="/">Fibo</NavLink>
-      <ul className="navbar-nav mr-auto">
-        <li className="nav-item">
-          <NavLink activeClassName="active" className="nav-link" to="/other">Other <span
-            className="sr-only">(current)</span></NavLink>
-        </li>
-      </ul>
+    <nav className="navbar is-light" role="navigation" aria-label="main navigation">
+      <div className="navbar-brand">
+        <NavLink className="navbar-item" to="/">Fibo</NavLink>
+      </div>
+
+      <div id="navbarBasicExample" className="navbar-menu">
+        <div className="navbar-start">
+          <NavLink className="navbar-item" to="/other">
+            Other
+          </NavLink>
+        </div>
+      </div>
     </nav>
-  )
+  );
 }
 
 export default Header;

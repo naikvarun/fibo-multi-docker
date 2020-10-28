@@ -28,8 +28,16 @@ services:
       - PG_DATABASE=postgres
       - PG_USER=postgres
       - PG_PASSWORD=pgPassword
-    ports:
-      - 5000:5000
     volumes:
       - /app/node_modules
       - ./server:/app
+  frontend:
+    stdin_open: true
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+        - 3000:3000
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app

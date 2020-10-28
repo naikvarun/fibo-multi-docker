@@ -15,7 +15,7 @@ redisClient.on('ready', () => {
 redisClient.on('error', ()=> console.error('Error connecting to redis'));
 const fib = (index) => {
     index = index-1;
-    const fiboValues = [1, 1]
+    const fiboValues = [0, 1]
 
     if ( index <= 1 ) {
         return fiboValues[index];

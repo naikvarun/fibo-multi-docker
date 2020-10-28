@@ -36,8 +36,12 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
-    ports:
-        - 3000:3000
     volumes:
       - /app/node_modules
       - ./frontend:/app
+  proxy:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.dev
+    ports:
+        - 3050:80

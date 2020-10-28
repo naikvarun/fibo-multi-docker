@@ -1,5 +1,9 @@
 version: '3'
 services:
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=pgPassword
   redis:
     image: redis
   worker:
@@ -9,3 +13,23 @@ services:
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+    volumes:
+      - /app/node_modules
+      - ./worker:/app
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PG_HOST=postgres
+      - PG_PORT=5432
+      - PG_DATABASE=postgres
+      - PG_USER=postgres
+      - PG_PASSWORD=pgPassword
+    ports:
+      - 5000:5000
+    volumes:
+      - /app/node_modules
+      - ./server:/app

@@ -1,0 +1,5 @@
+GET http://localhost:5000/fibo/indices
+
+GET http://localhost:5000/fibo/values
+
+POST http://localhost:5000/fibo/7

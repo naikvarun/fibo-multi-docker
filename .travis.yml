@@ -1,0 +1,9 @@
+services: docker
+dist: xenial
+os: linux
+language: generic
+
+before_install:
+  - docker build -t naikvarun/react-test -f ./frontend/Dockerfile.dev ./frontend
+script:
+  - docker run -e CI=true naikvarun/react-test yarn test

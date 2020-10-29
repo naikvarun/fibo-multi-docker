@@ -28,3 +28,5 @@ deploy:
   app: "fibo-docker"
   bucket: "elasticbeanstalk-us-east-2-803550409432"
   bucket_path: "fibo-docker"
+  on:
+      all_branches: true

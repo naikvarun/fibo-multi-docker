@@ -1,0 +1,40 @@
+{
+  "AWSEBDockerrunVersion": "2",
+  "containerDefinitions": [
+    {
+      "name": "frontend",
+      "image": "naikvarun/multi-frontend",
+      "hostname": "frontend",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "api-server",
+      "image": "naikvarun/multi-server",
+      "hostname": "api-server",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "worker",
+      "image": "naikvarun/multi-worker",
+      "hostname": "worker",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "proxy",
+      "image": "naikvarun/multi-nginx",
+      "hostname": "proxy",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80
+        }
+      ],
+      "links": ["frontend", "api-server"]
+    }
+  ]
+}

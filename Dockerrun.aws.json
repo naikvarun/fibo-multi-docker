@@ -9,9 +9,9 @@
       "memory": 128
     },
     {
-      "name": "api-server",
+      "name": "api",
       "image": "naikvarun/multi-server",
-      "hostname": "api-server",
+      "hostname": "api",
       "essential": false,
       "memory": 128
     },
@@ -34,7 +34,7 @@
           "hostPort": 80
         }
       ],
-      "links": ["frontend", "api-server"]
+      "links": ["frontend", "api"]
     }
   ]
 }

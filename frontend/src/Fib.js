@@ -14,7 +14,13 @@ const Fibo = () => {
         console.error(error)
       });
     axios.get('/api/fibo/values')
-      .then(result => setValues(result.data))
+      .then(result => {
+          if( result.data ) {
+            setValues(result.data) 
+          } else {
+            throw new Error('Got Null answer');
+          }
+        })
       .catch(error => {
         setValues({"1": 1, "2": 1, "3": 2, "4": 3, "5":5});
         console.error(error)

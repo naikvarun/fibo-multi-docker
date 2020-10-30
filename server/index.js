@@ -46,7 +46,8 @@ app.get('/fibo/values', async (req, res) => {
             console.error(error);
             return res.status(500).json(error);
         }
-        res.json(result);
+        
+        res.json(result ? result: {});
     });
 });
 

@@ -1,23 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fibo-api-deployment
+  name: fibo-worker-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      component: fibo-api
+      component: fibo-worker
   template:
     metadata:
       labels:
-        component: fibo-api
+        component: fibo-worker
     spec:
       containers:
-      - name: api
-        image: naikvarun/multi-server
+      - name: worker
+        image: naikvarun/multi-worker
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
-        ports:
-        - containerPort: 5000

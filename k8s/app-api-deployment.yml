@@ -16,4 +16,17 @@ spec:
       - name: api
         image: naikvarun/multi-server
         ports:
-        - containerPort: 5000
+          - containerPort: 5000
+        env:
+          - name: REDIS_HOST
+            value: app-redis-clusterip-service
+          - name: REDIS_PORT
+            value: '6379'
+          - name: PG_HOST
+            value: app-postgres-clusterip-service
+          - name: PG_PORT
+            value: '5432'
+          - name : PG_DATABASE
+            value: postgres
+          - name: PG_USER
+            value: postgres

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fibo-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: fibo-frontend
+  template:
+    metadata:
+      labels:
+        component: fibo-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: naikvarun/multi-frontend
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000

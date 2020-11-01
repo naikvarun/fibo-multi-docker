@@ -12,7 +12,7 @@ spec:
         component: app-postgres
     spec:
       containers:
-      - name: app-postgres-deployment
+      - name: app-postgres
         image: postgres
         ports:
         - containerPort: 5432

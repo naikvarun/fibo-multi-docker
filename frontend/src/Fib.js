@@ -38,7 +38,7 @@ const Fibo = () => {
     <>
       <section className="section pb-0">
         <div className="has-text-centered">
-          <span className="title is-1">Fibonacci Sequence</span>
+          <span className="title is-1">Fibonacci Sequence - v0.0.2</span>
         </div>
       </section>
       <section className="section pb-0">
